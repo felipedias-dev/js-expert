@@ -1,0 +1,17 @@
+{
+  "name": "class-04-coverage-e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.js",
+  "scripts": {
+    "test": "npx mocha -w *.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.0.0",
+    "nyc": "^15.1.0",
+    "supertest": "^6.2.4"
+  }
+}
