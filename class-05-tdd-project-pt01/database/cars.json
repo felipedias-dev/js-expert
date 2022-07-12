@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1138064f-036c-41d9-b34f-73602d7cbe42",
+    "name": "Mustang",
+    "releaseYear": 2021,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "1da608e3-9632-4699-bc82-650100f400cc",
+    "name": "PT Cruiser",
+    "releaseYear": 2022,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "5ed1397c-6c38-496f-9691-ced3f3abe04d",
+    "name": "XC90",
+    "releaseYear": 2021,
+    "available": true,
+    "gasAvailable": true
+  }
+]
