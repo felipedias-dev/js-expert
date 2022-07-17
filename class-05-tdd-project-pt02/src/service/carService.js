@@ -5,9 +5,15 @@ class CarService {
     this.carRepository = new BaseRepository({ file: cars });
   }
 
-  test() {
-    return this.carRepository.find();
+  getRandomPositionFromArray(list) {
+    const listLength = list.length;
+
+    return Math.floor(Math.random() * listLength);
   }
+
+  // async getAvailableCar(carCategory) {
+  //   return null;
+  // }
 }
 
 module.exports = CarService;
