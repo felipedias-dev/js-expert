@@ -11,9 +11,18 @@ class CarService {
     return Math.floor(Math.random() * listLength);
   }
 
-  // async getAvailableCar(carCategory) {
-  //   return null;
-  // }
+  getRandomCar(carCategory) {
+    const randomCarIndex = this.getRandomPositionFromArray(carCategory.carIds);
+    const carId = carCategory.carIds[randomCarIndex];
+    
+    return carId;
+  }
+
+  async getAvailableCar(carCategory) {
+    const carId = this.getRandomCar(carCategory);
+    const car = await this.carRepository.find(carId);
+    return car;
+  }
 }
 
 module.exports = CarService;
