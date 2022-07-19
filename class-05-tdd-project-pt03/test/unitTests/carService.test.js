@@ -74,4 +74,20 @@ describe('CarService Suite Tests', () => {
     expect(carService.carRepository.find.calledWithExactly(car.id)).to.be.ok;
     expect(result).to.be.deep.eq(expected);
   })
+
+  it('should calculate the final amout in Real given a carCategory, customer and numberOfDays', async () => {
+    const customer = Object.create(mocks.validCustomer);
+    customer.age = 50;
+
+    const carCategory = Object.create(mocks.validCarCategory);
+    carCategory.price = 37.6;
+
+    const numberOfDays = 5;
+
+    const expected = carService.currencyFormat.format(244.40);
+
+    const result = await carService.getRentalPrice(carCategory, customer, numberOfDays);
+
+    expect(result).to.be.deep.eq(expected);
+  })
 })
