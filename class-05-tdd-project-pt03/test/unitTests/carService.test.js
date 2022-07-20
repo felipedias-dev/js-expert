@@ -4,6 +4,7 @@ const { join } = require('path');
 const { expect } = require('chai');
 
 const CarService = require('../../src/service/carService');
+const { taxesBasedOnAge } = require('../../src/entities/tax');
 const mocks = {
   validCar: require('../mocks/valid-car.json'),
   validCarCategory: require('../mocks/valid-carCategory.json'),
@@ -75,7 +76,7 @@ describe('CarService Suite Tests', () => {
     expect(result).to.be.deep.eq(expected);
   })
 
-  it('should calculate the final amout in Real given a carCategory, customer and numberOfDays', async () => {
+  it('should calculate the final amount in Real given a carCategory, customer and numberOfDays', async () => {
     const customer = Object.create(mocks.validCustomer);
     customer.age = 50;
 
@@ -83,6 +84,11 @@ describe('CarService Suite Tests', () => {
     carCategory.price = 37.6;
 
     const numberOfDays = 5;
+
+    sandbox.stub(
+      carService,
+      'taxesBasedOnAge'
+    ).get(() => [{ from: 40, to: 50, then: 1.3 }]);
 
     const expected = carService.currencyFormat.format(244.40);
 
