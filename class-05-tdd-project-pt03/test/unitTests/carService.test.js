@@ -4,7 +4,7 @@ const { join } = require('path');
 const { expect } = require('chai');
 
 const CarService = require('../../src/service/carService');
-const { taxesBasedOnAge } = require('../../src/entities/tax');
+const Transaction = require('../../src/entities/transaction');
 const mocks = {
   validCar: require('../mocks/valid-car.json'),
   validCarCategory: require('../mocks/valid-carCategory.json'),
@@ -36,7 +36,7 @@ describe('CarService Suite Tests', () => {
     expect(result).to.be.lt(data.length).and.be.gte(0);
   })
 
-  it('should choose the first id from carIds in carCategory', () => {
+  it('should choose the first id from car IDs in car category', () => {
     const carCategory = mocks.validCarCategory;
     const carIdIndex = 0;
 
@@ -52,7 +52,7 @@ describe('CarService Suite Tests', () => {
     expect(result).to.be.eq(expected);
   })
 
-  it('should return an available car for a given carCategory', async () => {
+  it('should return an available car for a given car category', async () => {
     const car = mocks.validCar;
     const carCategory = Object.create(mocks.validCarCategory);
 
@@ -76,7 +76,7 @@ describe('CarService Suite Tests', () => {
     expect(result).to.be.deep.eq(expected);
   })
 
-  it('should calculate the final amount in Real given a carCategory, customer and numberOfDays', async () => {
+  it('should calculate the final amount in Real given a car category, customer and number of days', async () => {
     const customer = Object.create(mocks.validCustomer);
     customer.age = 50;
 
@@ -93,6 +93,41 @@ describe('CarService Suite Tests', () => {
     const expected = carService.currencyFormat.format(244.40);
 
     const result = await carService.getRentalPrice(carCategory, customer, numberOfDays);
+
+    expect(result).to.be.deep.eq(expected);
+  })
+
+  it('should return a transaction receipt given a customer and a car category', async () => {
+    const car = mocks.validCar;
+    const carCategory = {
+      ...mocks.validCarCategory,
+      price: 37.6,
+      carIds: [car.id]
+    };
+    
+    const numberOfDays = 5;
+    const dueDate = '10 de julho de 2022';
+    
+    const customer = Object.create(mocks.validCustomer);
+    customer.age = 20;
+
+    const now = new Date(2022, 6, 5);
+    sandbox.useFakeTimers(now.getTime());
+
+    sandbox.stub(
+      carService.carRepository,
+      carService.carRepository.find.name
+    ).resolves(car);
+
+    const expectedAmount = carService.currencyFormat.format(206.8);
+    
+    const result = await carService.rent(customer, carCategory, numberOfDays);
+    const expected = new Transaction({
+      customer,
+      car,
+      amount: expectedAmount,
+      dueDate,
+    });
 
     expect(result).to.be.deep.eq(expected);
   })
