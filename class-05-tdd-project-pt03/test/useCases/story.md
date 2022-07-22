@@ -43,7 +43,7 @@ And a car model that costs $37.6 per day
 
 And a delivery date that is for 05 days behind
 
-And given an actual date 05/11/2020
+And given an actual date 05/07/2022
 
 When I rent a car I should see the customer data
 
@@ -51,4 +51,4 @@ And the car selected
 
 And the final price which will be R$ 244,40
 
-And DueDate which will be printed in Brazilian Portuguese format "10 de Novembro de 2020"
+And DueDate which will be printed in Brazilian Portuguese format "10 de julho de 2022"
