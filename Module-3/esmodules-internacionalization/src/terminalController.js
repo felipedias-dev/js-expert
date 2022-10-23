@@ -23,6 +23,10 @@ export default class TerminalController {
     this.initializeTable(database, language);
   }
 
+  closeTerminal() {
+    this.terminal.close();
+  }
+
   initializeTable(database, language) {
     const data = database.map(item => new Person(item).formatted(language));
     const table = chalkTable(this.getTableOptions(), data);
