@@ -1,6 +1,7 @@
 import database from '../database.json' assert { type: 'json' };
 import Person from './person.js';
 import TerminalController from './terminalController.js';
+import { save } from './repository.js';
 
 const DEFAULT_LANG = 'pt-BR';
 const KILL_TERM = ':q';
@@ -12,16 +13,18 @@ terminalController.initializeTerminal(database, DEFAULT_LANG);
 async function mainLoop() {
   try {
     const answer = await terminalController.question('Insert info: ');
-    const person = Person.generateInstanceFromString(answer);
-
+    
     if (answer === KILL_TERM) {
       terminalController.closeTerminal();
       console.log('Process finished!');
-
+      
       return;
     }
 
-    console.log('Answer:', person.formatted(DEFAULT_LANG));
+    const person = Person.generateInstanceFromString(answer);
+
+    terminalController.updateTable(person.formatted(DEFAULT_LANG));
+    await save(person);
 
     return await mainLoop();
   } catch (error) {
