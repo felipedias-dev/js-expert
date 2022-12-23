@@ -1,0 +1,23 @@
+[
+  {
+    "id": "79e3bfca-edb5-48c4-957a-c321edc40f9b",
+    "name": "PT Cruiser",
+    "releaseYear": 2022,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "40f2d1b6-6723-4027-b4f6-5326855c3f20",
+    "name": "Volt",
+    "releaseYear": 2022,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "55677750-72b6-419e-9d5b-03920e45811d",
+    "name": "Silverado",
+    "releaseYear": 2021,
+    "available": true,
+    "gasAvailable": true
+  }
+]
