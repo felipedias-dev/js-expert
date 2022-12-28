@@ -1,0 +1,24 @@
+{
+  "name": "project-01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "npx nodemon --ignore database.json --exec node src/index.js",
+    "test": "npx mocha -w --parallel test/*.test.js",
+    "test:coverage": "npx c8 npx mocha --parallel test/*.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "c8": "^7.12.0",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "pdf-parse": "^1.1.1"
+  }
+}
